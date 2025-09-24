@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlhp7s1ofen1v"]
+
+[ext_resource type="Script" uid="uid://3llkevvwxe58" path="res://scripts/station.gd" id="1_0r0hh"]
+[ext_resource type="PackedScene" uid="uid://ct2p2ts770ef2" path="res://models/detail-overhang-wide.glb" id="1_rod8h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0r0hh"]
+size = Vector3(1, 0.414795, 1.16147)
+
+[node name="Station" type="Node3D"]
+script = ExtResource("1_0r0hh")
+
+[node name="detail-overhang-wide2" parent="." instance=ExtResource("1_rod8h")]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.193237, 0.626144)
+shape = SubResource("BoxShape3D_0r0hh")

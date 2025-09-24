@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://0vj0htdq1pyy"]
+
+[ext_resource type="Script" uid="uid://cetoptsa6q0tx" path="res://scripts/manager.gd" id="1_jyhfs"]
+[ext_resource type="MeshLibrary" uid="uid://c4h85e05fblq3" path="res://resources/tiles.tres" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://cy4bbsh1r75rc" path="res://scenes/client.tscn" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://crjemswj070gc" path="res://scenes/vehicle.tscn" id="4_tbgi4"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Manager" type="Node3D" parent="."]
+script = ExtResource("1_jyhfs")
+
+[node name="Timer" type="Timer" parent="Manager"]
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_o5qli")
+cell_scale = 2.0
+data = {
+"cells": PackedInt32Array(2, 65530, 5, 1, 65530, 6, 3, 65533, 1048588, 6, 65533, 10, 6, 65535, 655370, 8, 65533, 655370, 8, 65535, 10, 8, 65531, 40, 7, 65531, 40, 6, 65531, 40, 5, 65531, 40, 6, 65529, 4, 8, 65529, 4, 65535, 65535, 9, 65535, 65527, 9, 65532, 65530, 5, 65533, 65530, 15, 65534, 65530, 17, 65533, 65527, 13, 65533, 65535, 18, 65532, 7, 15, 65533, 7, 15, 65534, 7, 15, 65535, 7, 15, 0, 7, 15, 1, 7, 15, 2, 7, 15, 3, 7, 15, 4, 7, 15, 10, 65525, 655362, 9, 65525, 655362, 8, 65525, 655362, 7, 65525, 655362, 6, 65525, 655362, 65535, 65525, 655376, 65534, 65525, 655376, 65533, 65525, 655376, 2, 65525, 655376, 3, 65525, 655376, 4, 65525, 655376, 3, 65522, 9, 1, 65522, 9, 65535, 65522, 9, 65533, 65522, 9, 5, 65522, 9, 7, 65522, 9, 9, 65522, 9, 65530, 65522, 1441800, 65530, 65523, 1441800, 65530, 65524, 1441800, 65530, 65525, 1441800, 65530, 65526, 1441800, 65530, 65527, 1441800, 65530, 65528, 1441800, 65530, 65529, 1441800, 65528, 65529, 1441809, 65527, 65529, 1441809, 65526, 65529, 1441809, 65524, 65529, 1441809, 65523, 65529, 1441809, 65522, 65529, 1441809, 5, 2, 1048594, 4, 2, 1048594, 3, 2, 1048594, 1, 2, 1048594, 65535, 2, 1048594, 65533, 2, 1048594, 65532, 2, 1048594, 65531, 2, 1048594, 65530, 2, 1048594, 65529, 2, 1048594, 65528, 65533, 1048594, 65528, 65534, 1048594, 65528, 65535, 1048594, 65528, 0, 1048594, 65531, 10, 655382)
+}
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38867, 0.221497, -2.70117)
+size = Vector3(54.7773, 1.44299, 55.4023)
+
+[node name="Client" parent="." instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.9294, 1.44249, 11.1515)
+
+[node name="Vehicle" parent="." instance=ExtResource("4_tbgi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.219, 1.33314, 10.1346)
