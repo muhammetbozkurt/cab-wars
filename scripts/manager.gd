@@ -17,11 +17,9 @@ func _process(delta: float) -> void:
 
 
 func _on_timer_timeout() -> void:
-	print("add client time")
 	var stations: Array[Node] = get_tree().get_nodes_in_group("stations")
 	for  station in stations:
 		if station.has_method("add_client"):
 			var res = station.call("add_client")
 			if res:
-				print("client added")
 				return
