@@ -35,6 +35,8 @@ shape = SubResource("BoxShape3D_pu4i8")
 
 [node name="ClientEnterExitTimer" type="Timer" parent="."]
 
+[connection signal="area_shape_entered" from="ClientEnterArea" to="." method="_on_client_enter_area_area_shape_entered"]
+[connection signal="area_shape_exited" from="ClientEnterArea" to="." method="_on_client_enter_area_area_shape_exited"]
 [connection signal="body_entered" from="ClientEnterArea" to="." method="_on_client_enter_area_body_entered"]
 [connection signal="body_exited" from="ClientEnterArea" to="." method="_on_client_enter_area_body_exited"]
 [connection signal="timeout" from="ClientEnterExitTimer" to="." method="_on_client_enter_exit_timer_timeout"]

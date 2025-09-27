@@ -8,6 +8,8 @@ var turn_speed: float = 2.0
 var current_client: Node3D = null # depracated but we can use it in future
 var has_client: bool = false
 var possible_client: Node3D = null
+var current_target_station_area_id: int = -1
+var current_station_area_id: int = -1 
 
 func _ready():
 	add_to_group("vehicles")
@@ -48,7 +50,7 @@ func _on_client_enter_area_body_entered(body: Node3D) -> void:
 		return
 	possible_client = body
 	# TODO: we can add a small deal mechanic
-	possible_client.call("init_talk")
+	current_target_station_area_id = possible_client.call("init_talk")
 	clientEnterExitTimer.start(3)
 	
 	
@@ -65,3 +67,21 @@ func _on_client_enter_exit_timer_timeout() -> void:
 		has_client = true
 		possible_client.call("get_in_car")
 		possible_client = null # currently not neccesary because in "get_in_car" invoke queue_free
+	elif has_client and current_station_area_id > 0 and current_station_area_id == current_target_station_area_id:
+		has_client = false
+		current_target_station_area_id = -1
+		current_station_area_id = -1
+		print("client is gone :D")
+		#TODO: increase point
+
+
+func _on_client_enter_area_area_shape_entered(area_rid: RID, area: Area3D, area_shape_index: int, local_shape_index: int) -> void:
+	if has_client and current_target_station_area_id == area_rid.get_id():
+		current_station_area_id = area_rid.get_id()
+		print("we are at right station")
+		clientEnterExitTimer.start(3)
+
+
+func _on_client_enter_area_area_shape_exited(area_rid: RID, area: Area3D, area_shape_index: int, local_shape_index: int) -> void:
+	if current_station_area_id == area_rid.get_id():
+		current_station_area_id = -1
