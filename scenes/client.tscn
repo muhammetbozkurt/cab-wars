@@ -1,12 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cy4bbsh1r75rc"]
 
-[sub_resource type="GDScript" id="GDScript_7gnwo"]
-script/source = "extends CharacterBody3D
-
-
-func _ready() -> void:
-	add_to_group(\"clients\")
-"
+[ext_resource type="Script" uid="uid://ba12d8hje224" path="res://scripts/client.gd" id="1_5f806"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7gnwo"]
 height = 1.0
@@ -18,7 +12,7 @@ bottom_radius = 0.1
 height = 1.0
 
 [node name="Client" type="CharacterBody3D"]
-script = SubResource("GDScript_7gnwo")
+script = ExtResource("1_5f806")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_7gnwo")

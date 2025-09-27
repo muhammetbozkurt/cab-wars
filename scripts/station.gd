@@ -26,5 +26,10 @@ func add_client() -> bool:
 	var client_instance = client_scene.instantiate()
 	get_tree().current_scene.add_child(client_instance)
 	client_instance.global_position = deploy_marker.global_position
+	client_instance.start_station = self
 	
 	return true
+	
+	
+func clear_station() -> void:
+	is_full = false

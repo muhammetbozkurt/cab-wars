@@ -14,7 +14,7 @@
 script = ExtResource("1_jyhfs")
 
 [node name="Timer" type="Timer" parent="Manager"]
-wait_time = 10.0
+wait_time = 5.0
 autostart = true
 
 [node name="GridMap" type="GridMap" parent="."]
