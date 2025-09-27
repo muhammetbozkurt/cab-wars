@@ -3,6 +3,7 @@ extends Node3D
 @export var client_scene: PackedScene
 
 @onready var deploy_marker: Marker3D = $DeployMarker
+@onready var area: Area3D = $Area3D
 
 
 var is_full = false
@@ -24,9 +25,10 @@ func add_client() -> bool:
 		return false
 	is_full = true
 	var client_instance = client_scene.instantiate()
+	client_instance.start_station = self
 	get_tree().current_scene.add_child(client_instance)
 	client_instance.global_position = deploy_marker.global_position
-	client_instance.start_station = self
+	
 	
 	return true
 	
