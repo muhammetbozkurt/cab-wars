@@ -49,7 +49,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05272, 6.56259)
 [node name="Station2" parent="Stations" instance=ExtResource("5_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.24454, 1.26886, 6.6689)
 
-[node name="Station3" parent="Stations" instance=ExtResource("5_tbgi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.58124, 1.14443, 6.72398)
-
 [connection signal="timeout" from="Manager/Timer" to="Manager" method="_on_timer_timeout"]

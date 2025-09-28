@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @onready var clientEnterExitTimer: Timer = $ClientEnterExitTimer
+@onready var direction_arrow: MeshInstance3D = $DirectionArrow
 
 
 var speed: float = 5.0
@@ -15,6 +16,13 @@ func _ready():
 	add_to_group("vehicles")
 
 func _physics_process(delta):
+	if has_client and current_target_station_area_id > 0:
+		var stations: Array[Node] = get_tree().get_nodes_in_group("stations")
+		for station in stations:
+			var station_area: Area3D = station.get_node("Area3D")
+			if station_area and station_area.get_rid().get_id() == current_target_station_area_id:
+				direction_arrow.look_at(station.global_transform.origin, Vector3.UP)
+				break
 	# Get input direction
 	var input_vector = Vector2.ZERO
 	
@@ -65,10 +73,12 @@ func _on_client_enter_exit_timer_timeout() -> void:
 	if possible_client and not has_client:
 		#current_client = possible_client
 		has_client = true
+		direction_arrow.visible = true
 		possible_client.call("get_in_car")
 		possible_client = null # currently not neccesary because in "get_in_car" invoke queue_free
 	elif has_client and current_station_area_id > 0 and current_station_area_id == current_target_station_area_id:
 		has_client = false
+		direction_arrow.visible = false
 		current_target_station_area_id = -1
 		current_station_area_id = -1
 		print("client is gone :D")
