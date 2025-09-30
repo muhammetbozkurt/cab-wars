@@ -3,6 +3,8 @@ extends CharacterBody3D
 @onready var clientEnterExitTimer: Timer = $ClientEnterExitTimer
 @onready var direction_arrow: MeshInstance3D = $DirectionArrow
 
+@export var player_id: String = "player1" 
+
 
 var speed: float = 5.0
 var turn_speed: float = 2.0
@@ -14,6 +16,9 @@ var current_station_area_id: int = -1
 
 func _ready():
 	add_to_group("vehicles")
+	
+func get_player_action(base_name: String) -> String:
+	return "%s_%s" % [player_id, base_name]
 
 func _physics_process(delta):
 	if has_client and current_target_station_area_id > 0:
@@ -27,15 +32,15 @@ func _physics_process(delta):
 	var input_vector = Vector2.ZERO
 	
 	# Forward/backward
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed(get_player_action("move_forward")):
 		input_vector.y = 1.0
-	elif Input.is_action_pressed("ui_down"):
+	elif Input.is_action_pressed(get_player_action("move_back")):
 		input_vector.y = -1.0
 	
 	# Left/right turning
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed(get_player_action("move_left")):
 		input_vector.x = -1.0
-	elif Input.is_action_pressed("ui_right"):
+	elif Input.is_action_pressed(get_player_action("move_right")):
 		input_vector.x = 1.0
 	
 	# Apply movement

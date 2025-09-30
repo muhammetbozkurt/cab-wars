@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://0vj0htdq1pyy"]
+[gd_scene load_steps=6 format=3 uid="uid://0vj0htdq1pyy"]
 
 [ext_resource type="Script" uid="uid://cetoptsa6q0tx" path="res://scripts/manager.gd" id="1_jyhfs"]
 [ext_resource type="MeshLibrary" uid="uid://c4h85e05fblq3" path="res://resources/tiles.tres" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://cy4bbsh1r75rc" path="res://scenes/client.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://crjemswj070gc" path="res://scenes/vehicle.tscn" id="4_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://dlhp7s1ofen1v" path="res://scenes/station.tscn" id="5_tbgi4"]
 
@@ -29,12 +28,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38867, 0.221497, -2.70117)
 use_collision = true
 size = Vector3(54.7773, 1.44299, 55.4023)
 
-[node name="Client" parent="." instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.9294, 1.44249, 11.1515)
-
-[node name="Vehicle" parent="." instance=ExtResource("4_tbgi4")]
-transform = Transform3D(-0.04062, 0, -0.999175, 0, 1, 0, 0.999175, 0, -0.04062, -3.99876, 1.33314, 7.74069)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.226736, 0.973956, 0, -0.973956, 0.226736, 0, 0, 0)
 
@@ -48,5 +41,45 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05272, 6.56259)
 
 [node name="Station2" parent="Stations" instance=ExtResource("5_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.24454, 1.26886, 6.6689)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="P1_SubViewportContainer" type="SubViewportContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 512.0
+grow_vertical = 2
+
+[node name="P1_SubViewport" type="SubViewport" parent="Control/P1_SubViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Vehicle" parent="Control/P1_SubViewportContainer/P1_SubViewport" instance=ExtResource("4_tbgi4")]
+transform = Transform3D(-0.04062, 0, -0.999175, 0, 1, 0, 0.999175, 0, -0.04062, -3.99876, 1.33314, 7.74069)
+
+[node name="P2_SubViewportContainer" type="SubViewportContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -512.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="P2_SubViewport" type="SubViewport" parent="Control/P2_SubViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Vehicle" parent="Control/P2_SubViewportContainer/P2_SubViewport" instance=ExtResource("4_tbgi4")]
+transform = Transform3D(-0.04062, 0, -0.999175, 0, 1, 0, 0.999175, 0, -0.04062, -3.99876, 1.33314, 11.306)
+player_id = "player2"
 
 [connection signal="timeout" from="Manager/Timer" to="Manager" method="_on_timer_timeout"]
