@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @onready var clientEnterExitTimer: Timer = $ClientEnterExitTimer
 @onready var direction_arrow: MeshInstance3D = $DirectionArrow
+@onready var stunt_timer: Timer = $StuntTimer
 
 @export var player_id: String = "player1" 
 
@@ -13,6 +14,7 @@ var has_client: bool = false
 var possible_client: Node3D = null
 var current_target_station_area_id: int = -1
 var current_station_area_id: int = -1 
+var is_stunt = false
 
 func _ready():
 	add_to_group("vehicles")
@@ -21,6 +23,9 @@ func get_player_action(base_name: String) -> String:
 	return "%s_%s" % [player_id, base_name]
 
 func _physics_process(delta):
+	if is_stunt:
+		return
+	
 	if has_client and current_target_station_area_id > 0:
 		var stations: Array[Node] = get_tree().get_nodes_in_group("stations")
 		for station in stations:
@@ -100,3 +105,18 @@ func _on_client_enter_area_area_shape_entered(area_rid: RID, area: Area3D, area_
 func _on_client_enter_area_area_shape_exited(area_rid: RID, area: Area3D, area_shape_index: int, local_shape_index: int) -> void:
 	if current_station_area_id == area_rid.get_id():
 		current_station_area_id = -1
+
+func got_stunt():
+	if not is_stunt:
+		is_stunt = true
+		stunt_timer.start(15)
+		
+
+
+func _on_stunt_timer_timeout() -> void:
+	is_stunt = false
+
+
+func _on_attack_area_body_entered(body: Node3D) -> void:
+	if body.is_in_group("vehicles") and body.player_id != player_id:
+		body.call("got_stunt")

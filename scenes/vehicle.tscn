@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://crjemswj070gc"]
+[gd_scene load_steps=7 format=3 uid="uid://crjemswj070gc"]
 
 [ext_resource type="Script" uid="uid://diixyxcf2sjhq" path="res://scripts/simple_vehicle.gd" id="1_vehicle"]
 
@@ -17,6 +17,9 @@ size = Vector3(1, 0.5, 1.8)
 top_radius = 0.01
 bottom_radius = 0.1
 height = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d0fkt"]
+size = Vector3(1, 0.3, 0.6)
 
 [node name="Vehicle" type="CharacterBody3D"]
 script = ExtResource("1_vehicle")
@@ -45,8 +48,18 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2
 visible = false
 mesh = SubResource("CylinderMesh_pu4i8")
 
+[node name="AttackArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.07517)
+shape = SubResource("BoxShape3D_d0fkt")
+
+[node name="StuntTimer" type="Timer" parent="."]
+
 [connection signal="area_shape_entered" from="ClientEnterArea" to="." method="_on_client_enter_area_area_shape_entered"]
 [connection signal="area_shape_exited" from="ClientEnterArea" to="." method="_on_client_enter_area_area_shape_exited"]
 [connection signal="body_entered" from="ClientEnterArea" to="." method="_on_client_enter_area_body_entered"]
 [connection signal="body_exited" from="ClientEnterArea" to="." method="_on_client_enter_area_body_exited"]
 [connection signal="timeout" from="ClientEnterExitTimer" to="." method="_on_client_enter_exit_timer_timeout"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="timeout" from="StuntTimer" to="." method="_on_stunt_timer_timeout"]
