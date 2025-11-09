@@ -13,7 +13,7 @@
 script = ExtResource("1_jyhfs")
 
 [node name="Timer" type="Timer" parent="Manager"]
-wait_time = 5.0
+wait_time = 15.0
 autostart = true
 
 [node name="GridMap" type="GridMap" parent="."]
@@ -42,6 +42,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05272, 6.56259)
 [node name="Station2" parent="Stations" instance=ExtResource("5_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.24454, 1.26886, 6.6689)
 
+[node name="Station3" parent="Stations" instance=ExtResource("5_tbgi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86196, 1.15185, 0.470389)
+
+[node name="Station4" parent="Stations" instance=ExtResource("5_tbgi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7105, 2.32158, 0.404044)
+
+[node name="Station5" parent="Stations" instance=ExtResource("5_tbgi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.08284, 1.05272, -9.62683)
+
+[node name="Station6" parent="Stations" instance=ExtResource("5_tbgi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.12385, 1.26886, -9.88506)
+
+[node name="Station7" parent="Stations" instance=ExtResource("5_tbgi4")]
+transform = Transform3D(-0.0471064, 0, -0.99889, 0, 1, 0, 0.99889, 0, -0.0471064, -16.8453, 1.15185, -0.324688)
+
+[node name="Station8" parent="Stations" instance=ExtResource("5_tbgi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7105, 2.32158, -3.16144)
+
+[node name="Station9" parent="." instance=ExtResource("5_tbgi4")]
+transform = Transform3D(-0.995562, 0, 0.0941082, 0, 1, 0, -0.0941082, 0, -0.995562, -15.9393, 0.992802, -15.0743)
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -59,6 +80,7 @@ grow_vertical = 2
 
 [node name="P1_SubViewport" type="SubViewport" parent="Control/P1_SubViewportContainer"]
 handle_input_locally = false
+size = Vector2i(577, 648)
 render_target_update_mode = 4
 
 [node name="Vehicle" parent="Control/P1_SubViewportContainer/P1_SubViewport" instance=ExtResource("4_tbgi4")]
@@ -70,12 +92,13 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -512.0
+offset_left = -554.0
 grow_horizontal = 0
 grow_vertical = 2
 
 [node name="P2_SubViewport" type="SubViewport" parent="Control/P2_SubViewportContainer"]
 handle_input_locally = false
+size = Vector2i(577, 648)
 render_target_update_mode = 4
 
 [node name="Vehicle" parent="Control/P2_SubViewportContainer/P2_SubViewport" instance=ExtResource("4_tbgi4")]

@@ -1,12 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://crjemswj070gc"]
 
 [ext_resource type="Script" uid="uid://diixyxcf2sjhq" path="res://scripts/simple_vehicle.gd" id="1_vehicle"]
+[ext_resource type="PackedScene" uid="uid://c60lfux7winni" path="res://assets/CAR Model.glb" id="2_d0fkt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pyp4e"]
-radius = 0.3
-height = 1.5
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_pu4i8"]
 radius = 0.3
 height = 1.5
 
@@ -27,10 +24,6 @@ script = ExtResource("1_vehicle")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_pyp4e")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_pu4i8")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.454877, 0.546592)
@@ -55,6 +48,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.07517)
 shape = SubResource("BoxShape3D_d0fkt")
 
 [node name="StuntTimer" type="Timer" parent="."]
+
+[node name="CAR Model" parent="." instance=ExtResource("2_d0fkt")]
+transform = Transform3D(-0.003, 0, 4.52987e-10, 0, 0.003, 0, -4.52987e-10, 0, -0.003, 0, -0.230085, -0.151139)
 
 [connection signal="area_shape_entered" from="ClientEnterArea" to="." method="_on_client_enter_area_area_shape_entered"]
 [connection signal="area_shape_exited" from="ClientEnterArea" to="." method="_on_client_enter_area_area_shape_exited"]
